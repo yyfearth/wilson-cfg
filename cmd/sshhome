@@ -1,0 +1,15 @@
+if [ -z $(ifconfig en0|grep -o 192.168.0.101) ]; then
+	addr=home.yyfearth.com
+else
+	addr=192.168.0.100
+fi
+echo connect to $addr
+if [ $# -lt 1 ]; then
+	ssh wilson@$addr
+elif [ "$1" = "sftp" ]; then
+	sftp wilson@$addr
+elif [ "$1" = "proxy" ]; then
+	ssh -CqTfnN -D 7070 wilson@$addr
+else
+	echo "cannot understand $1"
+fi

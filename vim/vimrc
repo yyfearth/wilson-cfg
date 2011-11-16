@@ -1,0 +1,36 @@
+
+set ai
+set nu
+filetype on
+set history=1000
+set background=dark
+syntax on
+set smartindent
+set smarttab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set showmatch
+set guioptions-=T
+set backspace=indent,eol,start
+set nocompatible
+set colorcolumn=80
+
+if has("multi_byte")
+set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,chinese
+endif
+
+set lines=35 columns=120
+if has("gui_running")
+    colorscheme macvim
+endif
+
+let Tlist_Show_One_File=1
+let Tlist_Exit_OnlyWindow=1
+
+:autocmd  BufEnter  *  call  DoWordComplete()
+
+let g:winManagerWindowLayout='FileExplorer'
+nmap wm :WMToggle<cr>
+

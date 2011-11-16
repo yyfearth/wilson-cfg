@@ -1,0 +1,50 @@
+#!/bin/sh
+v=cf
+x=.tar.xz
+p=
+f=off
+set -- `getopt vfxp: "$@"`
+if [ $# -lt 1 ]; then
+    echo "empty input"
+    exit 1
+fi
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -p) p=./;;
+        -f) f=on;;
+        -x) x=.txz;;
+        -v)	v=cvf;;
+        --)	shift; break;;
+        -*)
+            echo >&2 \
+            "usage: $0 [-vzfd] dir"
+            exit 1;;
+        *)	break;;
+    esac
+    shift
+done
+dir=$1
+if test -d "$dir"; then
+    [ "$p" = "" ] && p=$(dirname "$dir")/
+    b=$(basename "$dir")
+    ff=$p$b
+    if test -f "$ff$x"; then
+        if [ "$f" = "on" ]; then
+            rm -f "$ff$x"
+        else
+            echo "$ff$x exists"
+            exit 1
+        fi
+    fi
+    echo "tar xz $of to $ff$x"
+    tar -$v $ff.tar $dir
+    xz -z9ev $ff.tar
+    if [ "$x" = ".txz" ]; then
+        mv $ff.tar.xz $ff.txz
+    fi
+    echo "$ff$x Done!"
+    exit
+else
+    echo "$dir not extis"
+    exit 1
+fi
