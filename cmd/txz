@@ -1,5 +1,5 @@
 #!/bin/sh
-v=cf
+v=e9z
 x=.tar.xz
 p=
 f=off
@@ -13,7 +13,7 @@ while [ $# -gt 0 ]; do
         -p) p=./;;
         -f) f=on;;
         -x) x=.txz;;
-        -v)	v=cvf;;
+        -v)	v=e9zv;;
         --)	shift; break;;
         -*)
             echo >&2 \
@@ -36,12 +36,8 @@ if test -d "$dir"; then
             exit 1
         fi
     fi
-    echo "tar xz $of to $ff$x"
-    tar -$v $ff.tar $dir
-    xz -z9ev $ff.tar
-    if [ "$x" = ".txz" ]; then
-        mv $ff.tar.xz $ff.txz
-    fi
+    echo "tar xz $dir to $ff$x"
+    tar -cf - --exclude='__MACOSX*' --exclude='*.DS_Store' "$dir" | xz -$v - > "$ff$x"
     echo "$ff$x Done!"
     exit
 else
