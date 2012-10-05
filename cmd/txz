@@ -23,7 +23,7 @@ while [ $# -gt 0 ]; do
     esac
     shift
 done
-dir=$1
+dir="$1"
 if test -d "$dir"; then
     [ "$p" = "" ] && p=$(dirname "$dir")/
     b=$(basename "$dir")

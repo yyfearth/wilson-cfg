@@ -1,8 +1,9 @@
+#!/bin/sh
 if [ $# -lt 1 ]; then
-	find . -name .DS_Store -o -name ._* -depth
-elif [ "$1" = "clear" ]; then
+	find . -name .DS_Store -o -name "._*" -depth
+elif [ "$1" = "clean" ]; then
 	find . -name .DS_Store -depth -exec rm {} \;
-	echo cleared
+	echo cleaned
 else
 	echo "cannot understand $1"
 fi
