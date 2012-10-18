@@ -18,8 +18,8 @@ defaults write com.apple.finder QLEnableTextSelection -bool TRUE
 echo "Show User Library"
 chflags nohidden ~/Library/
 
-# echo "Hide a volume in OSX"
-# SetFile -a V /Volumes/OSX\ Installer
+echo "Hide a volume in OSX"
+SetFile -a V /Volumes/OS\ X\ Installer
 
 echo "Sublime Test Cmd Line"
 ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
