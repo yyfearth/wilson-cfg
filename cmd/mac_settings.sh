@@ -15,6 +15,9 @@ defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
 echo "Text Selectable in Quick Look previews"
 defaults write com.apple.finder QLEnableTextSelection -bool TRUE
 
+echo "Search under Current Folder"
+defaults write com.apple.finder FXDefaultSearchScope -string “SCcf”
+
 echo "Show User Library"
 chflags nohidden ~/Library/
 
