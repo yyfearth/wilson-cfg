@@ -27,9 +27,9 @@ SetFile -a V /Volumes/OS\ X\ Installer
 echo "Sublime Test Cmd Line"
 ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
 
-# echo Disable Hibernate
-# sudo pmset -a hibernatemode 0
-# sudo rm /var/vm/sleepimage
+echo Disable Hibernate
+sudo pmset -a hibernatemode 0
+sudo rm /var/vm/sleepimage
 
 echo "Kill Finder to Apply Settings"
 killall Finder
