@@ -1,7 +1,7 @@
 #!/bin/bash
 src=$1
 out=$2
-rmk="// $3"
+rmk=$3
 tool=${tools:-$(cd "$(dirname "$(which $0)")" && pwd)}
 if [ -z "$out" ]; then
 	out="$(dirname $src)/$(basename -s .js $src).min.js"
@@ -10,7 +10,7 @@ echo -n "compress js file $src to $out"
 if [ -z "$rmk" ]; then
 	java -jar "$tool/compiler.jar" --js $src --js_output_file $out --compilation_level SIMPLE_OPTIMIZATIONS
 else
-	echo "$rmk" > $out
+	echo "// $rmk" > $out
 	java -jar "$tool/compiler.jar" --js $src --compilation_level SIMPLE_OPTIMIZATIONS >> $out
 fi
 echo " - done!"

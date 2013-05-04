@@ -1,7 +1,7 @@
 #!/bin/bash
 src=$1
 out=$2
-rmk="/* $3 */"
+rmk=$3
 tool=${tools:-$(cd "$(dirname "$(which $0)")" && pwd)}
 if [ -z "$out" ]; then
 	out="$(dirname $src)/$(basename -s .css $src).min.css"
@@ -10,7 +10,7 @@ echo -n "compress css file $src to $out"
 if [ -z "$rmk" ]; then
 	java -jar "$tool/yuicompressor.jar" $src --charset utf-8 -o $out
 else
-	echo "$rmk" > $out
+	echo "/* $rmk */" > $out
 	java -jar "$tool/yuicompressor.jar" $src --charset utf-8 >> $out
 fi
 echo " - done!"
