@@ -24,8 +24,8 @@ chflags nohidden ~/Library/
 #echo "Hide a volume in OSX"
 #SetFile -a V /Volumes/OS\ X\ Installer
 
-echo "Sublime Test Cmd Line"
-ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
+echo "Sublime Text Cmd Line"
+ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
 
 echo Disable Hibernate
 sudo pmset -a hibernatemode 0
