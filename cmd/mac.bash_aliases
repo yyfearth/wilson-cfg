@@ -1,8 +1,8 @@
 #!/bin/sh
 cmd=/Users/wilson/Dev/cfg/cmd
 export PATH="$PATH:$cmd"
-alias l="ls -CF"
-alias ll="ls -AlF"
+alias l="ls -CFG"
+alias ll="ls -AlFG"
 alias sshproxy="ssh -CqTfnN -D 7070 wilson@aws.yyfearth.com"
 alias sshproxy-gao="ssh -CqTfnN -D 7070 wilson@gaosvr01.engr.sjsu.edu"
 alias sshproxy-mason="ssh -CqTfnN -D 7070 wilson@masonwan.com"
