@@ -1,0 +1,48 @@
+#!/usr/bin/ruby
+
+# Dropzone Destination Info
+# Name: Pack up to txz
+# Description: Pack up a directory to txz tarball with tar and xz (need install first).
+# Handles: NSFilenamesPboardType
+# Events: Dragged
+# Creator: Wilson
+# URL: http://yyfearth.com
+# IconURL: https://github.com/yyfearth/dropzone-user-scripts/raw/txz/icons/folder_tar.png
+
+def dragged
+  
+  $dz.determinate(true)
+
+  count = $items.count
+  percent = 0.0
+
+  $dz.begin "Packing #{count} Dir to #{count} txz file..."
+
+  dirs = $items.map do |dir|
+    dir = File.expand_path dir
+    if not File.directory? dir
+      $dz.alert 'Invalid Dir', "Invalid Dir #{dir}"
+      return
+    end
+    $dz.percent percent += 5.0 / count
+    dir
+  end
+
+  dirs.compact!
+
+  wd = Dir.getwd
+
+  for dir in dirs
+    path = File.dirname(dir)#.sub(' ', '\ ')
+    name = File.basename(dir)#.sub(' ', '\ ')
+    #$dz.alert name, path
+    `cd "#{path}" && XZ_OPT=-9e tar --exclude='__MACOSX*' --exclude='*.DS_Store' -cJf "#{name}.txz" "#{name}"`
+    $dz.percent percent += 95.0 / count
+    #"#{dir}.txz"
+  end
+
+  Dir.chdir wd
+
+  $dz.finish "#{count} txz created"
+  $dz.url false
+end
