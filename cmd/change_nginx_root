@@ -1,0 +1,18 @@
+#!/bin/sh
+DIR=$1
+ROOT=/Library/WebServer/Documents
+if [ ! -d "$DIR" ]; then
+	DIR=$(pwd)
+fi
+read -p "Change Apache ROOT: $ROOT -> $DIR ?"
+if [ -L $ROOT ]; then
+	sudo rm /Library/WebServer/Documents
+	echo 'Remove old symlink'
+elif [ ! -d "$ROOT" ]; then
+	sudo mv $ROOT $ROOT.old
+	echo 'Remove old $ROOT to $ROOT.old'
+fi
+sudo ln -s "$DIR" /Library/WebServer/Documents
+echo "Synlink $ROOT -> $DIR"
+sudo nginx -s reload
+echo 'Restart Apache Done'
